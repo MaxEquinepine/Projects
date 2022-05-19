@@ -16,10 +16,12 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
 //Retrieving a specific user
 router.get("/:id", getUser, (req, res) => {
   res.json(res.user);
 });
+
 //Creating a user
 router.post("/", async (req, res) => {
   try {
@@ -35,6 +37,7 @@ router.post("/", async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+
 //Updating a user
 router.patch("/:id", getUser, async (req, res) => {
   if (req.body.username != null) {
@@ -50,6 +53,7 @@ router.patch("/:id", getUser, async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+
 //Deleting a user
 router.delete("/:id", getUser, async (req, res) => {
   try {
@@ -61,6 +65,7 @@ router.delete("/:id", getUser, async (req, res) => {
   }
 });
 
+//Checks if user is in the database
 router.post("/login", async (req, res) => {
   try {
     const users = await User.find();

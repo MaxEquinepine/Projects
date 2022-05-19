@@ -5,17 +5,6 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const User = require("./models/user");
 
-const posts = [
-  {
-    username: "Wouter",
-    title: "Post 1",
-  },
-  {
-    username: "Kyle",
-    title: "Post 2",
-  },
-];
-
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on("error", (error) => console.error(error));
@@ -33,7 +22,6 @@ app.get("/posts", authenticateToken, async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-  //res.json(posts.filter((post) => post.username === req.user.name));
 });
 
 function authenticateToken(req, res, next) {
