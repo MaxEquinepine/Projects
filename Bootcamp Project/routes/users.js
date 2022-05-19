@@ -2,6 +2,10 @@ const express = require("express");
 const user = require("../models/user");
 const router = express.Router();
 const User = require("../models/user");
+const bcrypt = require("bcrypt");
+const hash = require("bcrypt");
+const db = require("../models/user");
+const users = [];
 
 //Retrieving all users
 router.get("/", async (req, res) => {
@@ -18,12 +22,14 @@ router.get("/:id", getUser, (req, res) => {
 });
 //Creating a user
 router.post("/", async (req, res) => {
-  const user = new User({
-    username: req.body.username,
-    password: req.body.password,
-  });
   try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const user = new User({
+      username: req.body.username,
+      password: hashedPassword,
+    });
     const newUser = await user.save();
+    users.push(user);
     res.status(201).json(newUser);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -52,6 +58,27 @@ router.delete("/:id", getUser, async (req, res) => {
     res.user;
   } catch (err) {
     res.status(500).json({ message: err.message });
+  }
+});
+
+router.post("/login", async (req, res) => {
+  try {
+    const users = await User.find();
+  } catch (err) {
+    res.status(500).send();
+  }
+  const user = users.find((user) => (user.username = req.body.username));
+  if (user == null) {
+    return res.status(400).send("Cannot find user");
+  }
+  try {
+    if (await bcrypt.compare(req.body.password, user.password)) {
+      res.send("Success");
+    } else {
+      res.send("Not Allowed");
+    }
+  } catch {
+    res.status(500).send();
   }
 });
 

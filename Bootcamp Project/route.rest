@@ -11,13 +11,13 @@ POST http://localhost:3000/users
 Content-Type: application/json 
 
 {
-    "username": "Potgieter",
+    "username": "Mattheus",
     "password": "Test4321"
 }
 
 ###
 
-DELETE http://localhost:3000/users/62837f07519be111b92c883a
+DELETE http://localhost:3000/users/62862262e1f4300e7b579227
 
 ###
 
@@ -26,4 +26,14 @@ Content-Type: application/json
 
 {
     "username": "Mattheus"
+}
+
+###
+
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+    "username": "Wouter",
+    "password": "Test1234"
 }
