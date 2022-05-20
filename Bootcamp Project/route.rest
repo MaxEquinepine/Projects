@@ -3,7 +3,7 @@ GET http://localhost:3000/users
 
 ###
 
-GET http://localhost:3000/users/62835b490436f4da15589000
+GET http://localhost:3000/users/628741a69d8b839b1ba0fa60
 
 ###
 
@@ -11,17 +11,17 @@ POST http://localhost:3000/users
 Content-Type: application/json 
 
 {
-    "username": "Gideon",
-    "password": "Jacques"
+    "username": "Wouter",
+    "password": "Test1234"
 }
 
 ###
 
-DELETE http://localhost:3000/users/6286c3aa73c04a9d8db1045a
+DELETE http://localhost:3000/users/6286ca2de6befe92078b3605
 
 ###
 
-PATCH http://localhost:3000/users/62835b490436f4da15589000
+PATCH http://localhost:3000/users/628741a69d8b839b1ba0fa60
 Content-Type: application/json
 
 {
@@ -34,6 +34,6 @@ POST http://localhost:3000/users/login
 Content-Type: application/json
 
 {
-    "username": "Wouter",
+    "username": "",
     "password": "Test1234"
 }
