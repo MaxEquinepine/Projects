@@ -71,29 +71,19 @@ router.post("/login", async (req, res) => {
     const users = await User.find();
     const user = users.find((user) => (user.username = req.body.username));
     if (user == null) {
-      return res.status(400).send("Cannot find user");
+      return res.status(400).send({ message: "Cannot find user" });
     }
     if (user.username !== req.body.username) {
-      return res.status(400).send("Cannot find user");
+      return res.status(400).send({ message: "Cannot find user" });
     }
     if (await bcrypt.compare(req.body.password, user.password)) {
-      res.send("Success");
+      res.send({ message: "Success" });
     } else {
-      res.send("Not Allowed");
+      res.send({ message: "Not Allowed" });
     }
   } catch (err) {
     res.status(500).send();
   }
-
-  /*try {
-    if (await bcrypt.compare(req.body.password, user.password)) {
-      res.send("Success");
-    } else {
-      res.send("Not Allowed");
-    }
-  } catch {
-    res.status(500).send();
-  }*/
 });
 
 //middleware to retrieve a user from the database

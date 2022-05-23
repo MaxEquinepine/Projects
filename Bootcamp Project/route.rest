@@ -17,15 +17,15 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/users/6286ca2de6befe92078b3605
+DELETE http://localhost:3000/users/628742a41857333f473bbd79
 
 ###
 
-PATCH http://localhost:3000/users/628741a69d8b839b1ba0fa60
+PATCH http://localhost:3000/users/628742a41857333f473bbd79
 Content-Type: application/json
 
 {
-    "username": "Mattheus"
+    "username": "Arno"
 }
 
 ###
@@ -34,6 +34,40 @@ POST http://localhost:3000/users/login
 Content-Type: application/json
 
 {
-    "username": "",
-    "password": "Test1234"
+    "username": "Wouter",
+    "password": "Test123"
 }
+
+### 
+
+GET http://localhost:3000/posts
+
+###
+
+POST http://localhost:4000/login
+Content-Type: application/json
+
+{
+    "username": "Wouter"
+}
+
+###
+
+
+DELETE http://localhost:4000/logout
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWF0dGhldXMiLCJpYXQiOjE2NTMwMzE4NTksImV4cCI6MTY1MzAzMTg3NH0.KkNQ8mc43QEF-N3qfgRsOG0lj_2-T0AmFWyw6nx0DNo"
+}
+
+###
+
+POST http://localhost:4000/token
+Content-Type: application/json
+
+{
+    "token": "ayJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWF0dGhldXMiLCJpYXQiOjE2NTMwMzE4MzV9.malNovdemgQsz8XKYCjb-bqdlv8EzNjejZOuassNjG4"
+}
+
+
