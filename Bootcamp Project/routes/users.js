@@ -9,17 +9,28 @@ const users = [];
 
 //Retrieving all users
 router.get("/", async (req, res) => {
+  let result = [];
   try {
     const users = await User.find();
-    res.json(users);
+    for (let index = 0; index < users.length; index++) {
+      result =
+        result +
+        "Username: " +
+        users[index].username +
+        ", ID: " +
+        users[index].id +
+        ", ";
+    }
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
+
+  res.json(result);
 });
 
 //Retrieving a specific user
 router.get("/:id", getUser, (req, res) => {
-  res.json(res.user);
+  res.json(res.user.username);
 });
 
 //Creating a user
@@ -32,7 +43,7 @@ router.post("/", async (req, res) => {
     });
     const newUser = await user.save();
     users.push(user);
-    res.status(201).json(newUser);
+    res.status(201).json({ Created: true, Username: newUser.username });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -48,7 +59,7 @@ router.patch("/:id", getUser, async (req, res) => {
   }
   try {
     const updatedUser = await res.user.save();
-    res.json(updatedUser);
+    res.json(updatedUser.username);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
