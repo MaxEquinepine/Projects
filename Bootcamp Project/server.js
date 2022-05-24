@@ -4,6 +4,7 @@ const app = express();
 const morgan = require("morgan");
 const helmet = require("helmet");
 const cors = require("cors");
+
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const User = require("./models/user");
@@ -17,8 +18,8 @@ const rts = config.rts;
 
 mongoose.connect(dbURL, { useNewUrlParser: true });
 const db = mongoose.connection;
-db.on("error", (error) => console.error(error));
-db.once("open", () => console.log("Connected to database."));
+db.on("error", (error) => logger.info.error(error));
+db.once("open", () => logger.info("Connected to database."));
 
 app.use(helmet());
 app.use(morgan("dev"));
@@ -26,6 +27,7 @@ app.use(cors());
 app.use(express.json());
 
 const usersRouter = require("./routes/users");
+const logger = require("./logger");
 app.use("/users", usersRouter);
 
 app.get("/posts", authenticateToken, async (req, res) => {
@@ -80,4 +82,4 @@ function authenticateToken(req, res, next) {
   } catch (error) {}
 }
 
-app.listen(3000, () => console.log("Server started."));
+app.listen(3000, () => logger.error("Server started."));

@@ -5,7 +5,6 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const hash = require("bcrypt");
 const db = require("../models/user");
-const users = [];
 
 //Retrieving all users
 router.get("/", async (req, res) => {
