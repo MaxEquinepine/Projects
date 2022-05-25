@@ -4,7 +4,6 @@ const app = express();
 const morgan = require("morgan");
 const helmet = require("helmet");
 const cors = require("cors");
-
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const User = require("./models/user");
@@ -15,7 +14,7 @@ let config = require("./config");
 const dbURL = config.DBURL;
 const ats = config.ats;
 const rts = config.rts;
-
+//
 mongoose.connect(dbURL, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on("error", (error) => logger.info.error(error));
@@ -82,4 +81,4 @@ function authenticateToken(req, res, next) {
   } catch (error) {}
 }
 
-app.listen(3000, () => logger.error("Server started."));
+app.listen(3002, () => logger.error("Server started."));
