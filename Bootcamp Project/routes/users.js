@@ -111,4 +111,7 @@ async function getUser(req, res, next) {
   next();
 }
 
-module.exports = router;
+module.exports = {
+  getUser: getUser,
+  router: router,
+};
